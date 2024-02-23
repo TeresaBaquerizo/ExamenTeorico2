@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Películas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Listado de Películas</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Director</th>
+            <th>Fecha de Estreno</th>
+            <th>Genero</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pelicula : ${peliculas}">
+            <td th:text="${pelicula.id}"></td>
+            <td th:text="${pelicula.nombre}"></td>
+            <td th:text="${pelicula.director}"></td>
+            <td th:text="${pelicula.fechaEstreno}"></td>
+            <td th:each="genero : ${generos}" th:if="${genero.idgenero == pelicula.idgenero}" th:text="${genero.nombre}"></td>            
+            <td>
+                <a th:href="@{/peliculas/editar/{id}(id=${pelicula.id})}" class="btn btn-warning">Editar</a>
+                <a th:href="@{/peliculas/eliminar/{id}(id=${pelicula.id})}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/peliculas/registrar}" class="btn btn-primary">Registrar Nueva Película</a>
+</div>
+
+</body>
+</html>

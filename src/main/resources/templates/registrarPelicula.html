@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nueva Película</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Registrar Nueva Película</h2>
+    <form th:action="@{/peliculas/registrar}" method="post" class="form">
+  
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" th:field="${nuevaPelicula.nombre}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="director">Director:</label>
+            <input type="text" th:field="${nuevaPelicula.director}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaEstreno">Fecha de Estreno:</label>
+            <input type="date" th:field="${nuevaPelicula.fechaEstreno}" class="form-control" required>
+        </div>        
+        <div class="form-group">
+            <label for="genero">Género:</label>
+            <select th:field="${nuevaPelicula.idgenero}" class="form-control" required>
+                <option th:each="genero : ${generos}" th:value="${genero.idgenero}" th:text="${genero.nombre}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+    <a th:href="@{/peliculas}" class="btn btn-secondary mt-2">Volver al Listado</a>
+</div>
+
+</body>
+</html>
